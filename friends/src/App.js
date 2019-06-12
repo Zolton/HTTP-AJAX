@@ -1,13 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Route } from "react-router-dom";
+import FriendList from "./components/FriendList";
 
-function App() {
-  return (
-    <div className="App">
-      <h1>hello</h1>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      // Set home as friendlist since it's where most of the action will be happening
+      <div className="App">
+        <Route exact path="/" component={FriendList} />
+      </div>
+    );
+  }
 }
 
 export default App;
