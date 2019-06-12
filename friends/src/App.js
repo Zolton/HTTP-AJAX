@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Route } from "react-router-dom";
+import {Route} from "react-router-dom"
 import FriendList from "./components/FriendList";
 
 class App extends React.Component {
