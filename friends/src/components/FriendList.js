@@ -44,10 +44,11 @@ export default class FriendList extends React.Component {
             </>
           )}
           )}
+          <form><p>
           <input 
             type="text"
-            placeholder="Enter new friend here"
-            name="newFriend"
+            placeholder="Enter new friend name"
+            name="newFriendName"
             //For tormorrow: 
             //value="this.state.newFriend"
             // creat new friend in state, changeHandler will just set name to value, nothing more
@@ -55,7 +56,18 @@ export default class FriendList extends React.Component {
             //3) friends: [...this.state.friends, newFriend], newFriend
             // take existing array, pour it into a new array, add newFriend at the end, then reset the form value to zero
             // multipel fields require multiple inputs, just aggregate changes in onSubmit/addNewFriend function
-            />
+            /></p>
+            <p><input 
+            type="text"
+            placeholder="Enter new friend age"
+            name="newFriendAge"
+            /></p>
+            <p><input 
+            type="text"
+            placeholder="Enter new friend email"
+            name="newFriendEmail"
+            /></p>
+            </form>
             <button>Submit</button>
       </>
     );
