@@ -9,9 +9,7 @@ export default class FriendList extends React.Component {
       name: "",
       age: "",
       email: ""
-    },
-    postSuccess: "",
-    postError: ""
+    }
   };
 
   componentDidMount() {
@@ -35,6 +33,7 @@ export default class FriendList extends React.Component {
   };
 
   handleChange = e => {
+    //e.preventDefault();
     this.setState({
       newFriend: {
         ...this.state.newFriend,
@@ -75,7 +74,8 @@ export default class FriendList extends React.Component {
             </>
           );
         })}
-        <form onSubmit={this.postFriend(this.state.newFriend)}>
+        <form onSubmit = {() => {this.postFriend(this.state.newFriend)}}>
+        
           <p>
             <input
               type="text"
