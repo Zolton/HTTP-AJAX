@@ -13,12 +13,21 @@ export default class FriendList extends React.Component {
     }
   };
 
+
+
+
   componentDidMount() {
-    axios
-      .get(`http://localhost:5000/friends`)
-      .then(res => this.setState({ friends: res.data }))
-      .catch(rej => console.log(rej));
+    this.axioscall();
   }
+
+  // modularity
+  axioscall = () => {
+    axios
+    .get(`http://localhost:5000/friends`)
+    .then(res => this.setState({ friends: res.data }))
+    .catch(rej => console.log(rej));
+    }
+    
 
   // postFriend - whatever you get, call it "friend", and post it to the server
   postFriend = friend => {
@@ -36,9 +45,11 @@ export default class FriendList extends React.Component {
   };
 
   deleteFriend = id => {
+    
     axios
       .delete(`http://localhost:5000/friends/${id}`)
-      .then(res => console.log(res))
+      // Modulatiry - call axiosGET from server to re-render
+      .then(res => this.axioscall())
       .catch(rej => console.log(rej));
   };
 
@@ -67,9 +78,9 @@ export default class FriendList extends React.Component {
               <div>Age: {friend.age}</div>
               <div>Email: {friend.email}</div>
               <button
-              /* onClick = {this.deleteFriend(friend.id)} */
+              onClick = {()=>this.deleteFriend(friend.id)}
               >
-                Delete ID {friend.id} ?
+                Delete ID {friend.id}
               </button>
             </>
           );
