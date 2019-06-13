@@ -44,12 +44,17 @@ export default class FriendList extends React.Component {
       .catch(rej => console.log(rej));
   };
 
+ 
+
   deleteFriend = id => {
-    
     axios
       .delete(`http://localhost:5000/friends/${id}`)
-      // Modulatiry - call axiosGET from server to re-render
+      // Modularity - call axiosGET, since the server was updated and prior friend deleted,
+      //  calling it won't put them back in.  And axiosget has a SETSTATE built in, which
+      // forces a re-render
       .then(res => this.axioscall())
+      // less sexy alternative - just copy/paste the .then->setState from axios.get
+      .then(res => this.setState({ friends: res.data }))
       .catch(rej => console.log(rej));
   };
 
@@ -77,11 +82,16 @@ export default class FriendList extends React.Component {
               <div>Name: {friend.name}</div>
               <div>Age: {friend.age}</div>
               <div>Email: {friend.email}</div>
-              <button
-              onClick = {()=>this.deleteFriend(friend.id)}
-              >
+
+              {/* This was driving me nuts - Biggest/ONLY problem was I
+               can't put this.deleteFriend in curlys and call it a day bc
+              React sets it as the default and deletes the entire array!
+              The () act as the initial state, so the function is only called onClick  */}
+
+              <button onClick = {()=>this.deleteFriend(friend.id)}>            
                 Delete ID {friend.id}
               </button>
+              
             </>
           );
         })}
@@ -133,9 +143,7 @@ export default class FriendList extends React.Component {
             />
           </p>
           <button type="submit">Submit</button>
-          <button
-          /*onClick={this.putFriend ( {id}, this.state.newFriend )}*/
-          >
+          <button /*onClick={()=>this.putFriend (friend.id, this.state.newFriend)}*/>
             Update
           </button>
         </form>
