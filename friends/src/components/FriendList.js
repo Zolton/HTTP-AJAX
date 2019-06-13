@@ -9,7 +9,8 @@ export default class FriendList extends React.Component {
       name: "",
       age: "",
       email: "",
-      id: ""
+      id: "",
+      goodFriend: ""
     }
   };
 
@@ -78,11 +79,12 @@ export default class FriendList extends React.Component {
             //
             <>
               {/* Display info in each object */}
-
+              <div className="friendDisplay">
               <div>Name: {friend.name}</div>
-              <div>Age: {friend.age}</div>
-              <div>Email: {friend.email}</div>
-
+              <div>Age:  {friend.age}</div>
+              <div>Email:  {friend.email}</div>
+              <div>Good Friend?:  {friend.goodFriend}</div>
+              </div>
               {/* This was driving me nuts - Biggest/ONLY problem was I
                can't put this.deleteFriend in curlys and call it a day bc
               React sets it as the default and deletes the entire array!
@@ -102,7 +104,7 @@ export default class FriendList extends React.Component {
           <p>
             <input
               type="text"
-              placeholder="Enter new friend name"
+              placeholder="Update friend name"
               name="name"
               onChange={this.handleChange}
               value={this.state.newFriend.name}
@@ -111,7 +113,7 @@ export default class FriendList extends React.Component {
           <p>
             <input
               type="text"
-              placeholder="Enter new friend age"
+              placeholder="Update friend age"
               name="age"
               onChange={this.handleChange}
               value={this.state.newFriend.age}
@@ -125,7 +127,7 @@ export default class FriendList extends React.Component {
           <p>
             <input
               type="text"
-              placeholder="Enter new friend email"
+              placeholder="Update friend email"
               name="email"
               onChange={this.handleChange}
               value={this.state.newFriend.email}
@@ -134,10 +136,19 @@ export default class FriendList extends React.Component {
           <p>
             <input
               type="text"
-              placeholder="Enter new friend ID"
+              placeholder="Update friend ID"
               name="id"
               onChange={this.handleChange}
               value={this.state.newFriend.id}
+            />
+          </p>
+          <p>
+            <input
+              type="text"
+              placeholder="Are they a good friend?"
+              name="goodFriend"
+              onChange={this.handleChange}
+              value={this.state.newFriend.goodFriend}
             />
           </p>
           <button type="submit">Update</button>
