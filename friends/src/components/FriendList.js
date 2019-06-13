@@ -14,9 +14,6 @@ export default class FriendList extends React.Component {
     }
   };
 
-
-
-
   componentDidMount() {
     this.axioscall();
   }
@@ -24,11 +21,10 @@ export default class FriendList extends React.Component {
   // modularity
   axioscall = () => {
     axios
-    .get(`http://localhost:5000/friends`)
-    .then(res => this.setState({ friends: res.data }))
-    .catch(rej => console.log(rej));
-    }
-    
+      .get(`http://localhost:5000/friends`)
+      .then(res => this.setState({ friends: res.data }))
+      .catch(rej => console.log(rej));
+  };
 
   // postFriend - whatever you get, call it "friend", and post it to the server
   postFriend = friend => {
@@ -44,8 +40,6 @@ export default class FriendList extends React.Component {
       .then(res => console.log(res))
       .catch(rej => console.log(rej));
   };
-
- 
 
   deleteFriend = id => {
     axios
@@ -80,83 +74,78 @@ export default class FriendList extends React.Component {
             <>
               {/* Display info in each object */}
               <div className="friendDisplay">
-              <div>Name: {friend.name}</div>
-              <div>Age:  {friend.age}</div>
-              <div>Email:  {friend.email}</div>
-              <div>Good Friend?:  {friend.goodFriend}</div>
+                <div>Name: {friend.name}</div>
+                <div>Age: {friend.age}</div>
+                <div>Email: {friend.email}</div>
+                <div>Good Friend?: {friend.goodFriend}</div>
               </div>
               {/* This was driving me nuts - Biggest/ONLY problem was I
                can't put this.deleteFriend in curlys and call it a day bc
               React sets it as the default and deletes the entire array!
               The () act as the initial state, so the function is only called onClick  */}
 
-              <button onClick = {()=>this.deleteFriend(friend.id)}>            
-                Delete ID {friend.id}
+              <button onClick={() => this.deleteFriend(friend.id)}>
+                Delete friend # {friend.id}
               </button>
               <form
-          onSubmit={() => {
-
-            this.putFriend (friend.id, this.state.newFriend)
-            //this.postFriend(this.state.newFriend);
-          
-          }}
-        >
-          <p>
-            <input
-              type="text"
-              placeholder="Update friend name"
-              name="name"
-              onChange={this.handleChange}
-              value={this.state.newFriend.name}
-            />
-          </p>
-          <p>
-            <input
-              type="text"
-              placeholder="Update friend age"
-              name="age"
-              onChange={this.handleChange}
-              value={this.state.newFriend.age}
-              /*
+                onSubmit={() => {
+                  this.putFriend(friend.id, this.state.newFriend);
+                }}
+              >
+                <p>
+                  <input
+                    type="text"
+                    placeholder="Update friend name"
+                    name="name"
+                    onChange={this.handleChange}
+                    value={this.state.newFriend.name}
+                  />
+                </p>
+                <p>
+                  <input
+                    type="text"
+                    placeholder="Update friend age"
+                    name="age"
+                    onChange={this.handleChange}
+                    value={this.state.newFriend.age}
+                    /*
               whatever you put for the input name, will show up at [e.target.name]. 
               That has to be one of the already existing keys for newFriend or 
               else you are just creating new key:value pairs
               */
-            />
-          </p>
-          <p>
-            <input
-              type="text"
-              placeholder="Update friend email"
-              name="email"
-              onChange={this.handleChange}
-              value={this.state.newFriend.email}
-            />
-          </p>
-          <p>
-            <input
-              type="text"
-              placeholder="Update friend ID"
-              name="id"
-              onChange={this.handleChange}
-              value={this.state.newFriend.id}
-            />
-          </p>
-          <p>
-            <input
-              type="text"
-              placeholder="Are they a good friend?"
-              name="goodFriend"
-              onChange={this.handleChange}
-              value={this.state.newFriend.goodFriend}
-            />
-          </p>
-          <button type="submit">Update</button>
-          
-            
-        </form>
-              
-              
+                  />
+                </p>
+                <p>
+                  <input
+                    type="text"
+                    placeholder="Update friend email"
+                    name="email"
+                    onChange={this.handleChange}
+                    value={this.state.newFriend.email}
+                  />
+                </p>
+                <p>
+                  <input
+                    type="text"
+                    placeholder="Update friend ID"
+                    name="id"
+                    onChange={this.handleChange}
+                    value={this.state.newFriend.id}
+                  />
+                </p>
+                <p>
+                  <input
+                    type="text"
+                    placeholder="Are they a good friend?"
+                    name="goodFriend"
+                    onChange={this.handleChange}
+                    value={this.state.newFriend.goodFriend}
+                  />
+                </p>
+                <button type="submit">
+                  Update info for friend # {friend.id}
+                </button>
+              </form>
             </>
           );
         })}
@@ -166,6 +155,7 @@ export default class FriendList extends React.Component {
             this.postFriend(this.state.newFriend);
           }}
         >
+          <h2> Add new friends! </h2>
           <p>
             <input
               type="text"
@@ -208,9 +198,6 @@ export default class FriendList extends React.Component {
             />
           </p>
           <button type="submit">Submit</button>
-          <button /*onClick={()=>this.putFriend (friend.id, this.state.newFriend)}*/>
-            Update
-          </button>
         </form>
       </>
     );
