@@ -91,6 +91,60 @@ export default class FriendList extends React.Component {
               <button onClick = {()=>this.deleteFriend(friend.id)}>            
                 Delete ID {friend.id}
               </button>
+              <form
+          onSubmit={() => {
+
+            this.putFriend (friend.id, this.state.newFriend)
+            //this.postFriend(this.state.newFriend);
+          
+          }}
+        >
+          <p>
+            <input
+              type="text"
+              placeholder="Enter new friend name"
+              name="name"
+              onChange={this.handleChange}
+              value={this.state.newFriend.name}
+            />
+          </p>
+          <p>
+            <input
+              type="text"
+              placeholder="Enter new friend age"
+              name="age"
+              onChange={this.handleChange}
+              value={this.state.newFriend.age}
+              /*
+              whatever you put for the input name, will show up at [e.target.name]. 
+              That has to be one of the already existing keys for newFriend or 
+              else you are just creating new key:value pairs
+              */
+            />
+          </p>
+          <p>
+            <input
+              type="text"
+              placeholder="Enter new friend email"
+              name="email"
+              onChange={this.handleChange}
+              value={this.state.newFriend.email}
+            />
+          </p>
+          <p>
+            <input
+              type="text"
+              placeholder="Enter new friend ID"
+              name="id"
+              onChange={this.handleChange}
+              value={this.state.newFriend.id}
+            />
+          </p>
+          <button type="submit">Update</button>
+          
+            
+        </form>
+              
               
             </>
           );
